@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>CTUT Pray</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+  <!-- Video nền hoa đào -->  
+  <video autoplay muted loop id="hoa">
+    <source src="Items/hoadao.mp4" type="video/mp4">
+  </video>
+    
+  <!--nhạc nền-->
+  <audio id="prayMusic" src="Items/NhacTinhTam.MP3"></audio>
+
+
+  <div class="scene">
+
+    <!-- Ảnh nhang -->
+    <img src="Items/nhang.png" id="incense" class="incense">
+
+    <!-- Hiệu ứng khói -->
+    <div class="smoke"></div>
+    <div class="smoke"></div>
+    <div class="smoke"></div>
+    <div class="smoke"></div>
+    <div class="smoke"></div>
+    <div class="smoke"></div>
+    <div class="smoke"></div>
+    <div class="smoke"></div>
+
+    <!-- Ảnh bàn thờ -->
+    <img src="Items/nenCTUTPray.png" class="altar" >
+
+  </div>
+
+  <hr>
+
+  <input type="email" id="email" name="email"  placeholder ="Mail sinh viên của bạn..." style="width: 350px; height: 30px;" >
+
+  <br> <br>
+
+  <textarea id ="textarea" placeholder="Mong ước của bạn là ..." style="width: 350px; height: 50px;"></textarea>
+
+  
+  <main>
+    <button id="prayBtn">Thắp hương 🙏</button>
+
+    <p id="result"></p>
+  </main>
+
+
+  <script >
+    
+    // Xử lý nút Thắp hương.
+    document.getElementById('prayBtn').addEventListener('click', () => {
+
+        const video = document.getElementById("hoa");
+
+        const email = document.getElementById('email').value;
+        const incense = document.getElementById('incense');
+        const smoke = document.querySelectorAll('.smoke');
+          
+        const mail = document.getElementById('email').value.trim();
+        const mongMuon = document.getElementById('textarea').value.trim();
+
+        // Check rỗng
+        if (mail === "" || mongMuon === "") {
+
+          alert("Hãy nhập đủ thông tin trước khi cầu nguyện!");
+          return; 
+        }
+        
+      
+        // Check email
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(mail)) {
+          alert("❌ Email không hợp lệ!");
+          return;
+        }
+        
+        document.getElementById('email').value = "";
+        document.getElementById('textarea').value = "";
+
+        // Phát nhạc
+        const music = document.getElementById('prayMusic');
+        music.currentTime = 0; // phát lại từ đầu
+        music.play();
+
+        
+        document.getElementById('result').innerText = `✦ Mong ước của ${email} đã được Tổ CTUT ghi nhận! Chúc bạn may mắn! ✦`;
+
+          // reset animation nhang nếu bấm lại
+        incense.classList.remove('active');
+        void incense.offsetWidth;
+
+        incense.classList.add('active');
+        
+        // reset animation khói nếu bấm lại
+        smoke.forEach(s => {
+          s.classList.remove('active');
+          void s.offsetWidth;
+          
+          setTimeout(() => { //chờ 2s rồi mới hiện khói
+             s.classList.add('active');
+          }, 2000);
+          
+      
+        });
+
+        // // Hiện video hoa đào
+        // video.style.display = "block";
+        // video.play();
+     
+    });
+  </script>
+  
+</body>
+
+</html>

@@ -1,0 +1,143 @@
+body { 
+  font-family: Arial, sans-serif; 
+  text-align: center; 
+  
+  background-color: #ece8e8; 
+}
+
+button { padding: 12px 24px; font-size: 18px; cursor: pointer; }
+/* ---------------------------------------------------------------------------------------------------- */
+
+
+/* Cảnh bàn thờ */
+.scene {
+  position: relative;
+  width: 380px;   /* chỉnh theo ảnh nền */
+  margin: auto;
+}
+
+/* Ảnh bàn thờ */
+.altar {
+  height: 470px;
+  /* display: block; */
+}
+
+/* Ảnh nhang */
+.incense {
+  position: absolute;
+
+  left: 51.5%;
+  bottom: 210px;
+
+  transform: translate(-50%, -200px);
+  width: 50px;
+  opacity: 0;
+}
+
+
+/* Animation rơi */
+@keyframes incenseDrop {
+  from {
+    transform: translate(-50%, -250px);
+    opacity: 0;
+  }
+  to {
+    transform: translate(-50%, 0);
+    opacity: 1;
+  }
+}
+
+.incense.active {
+  animation: incenseDrop 2s ease-out forwards;
+}
+/* ---------------------------------------------------------------------------------------------------- */
+
+/* Hiệu ứng khói */
+
+.smoke {
+  position: absolute;
+  left: 50%;
+  width: 200px;
+  height: 200px;
+
+  border-radius: 50%;
+  filter: blur(40px);
+
+
+}
+.smoke.active {
+  animation: smokeUp 6s infinite ease-in-out;
+}
+
+
+@keyframes smokeUp {
+  0% {
+
+    transform: translate(-50%, 80px) scale(0.1);
+    opacity: 0.8;
+    background: rgba(0, 0, 0, 0.15);
+    background-color: rgb(143, 140, 140);
+  }
+  50% {
+    /* opacity: 0.6; */
+    /* background: rgba(0, 0, 0, 0.15);
+    background-color: rgb(101, 99, 99); */
+  }
+  100% {
+    transform: translate(-50%, -600px) scale(1);
+    opacity: 0.6;
+    background: rgba(0, 0, 0, 0.15);
+    background-color: rgb(96, 95, 95);
+  }
+}
+
+.smoke:nth-child(2) {
+  left: 45%;
+  animation-delay: 1s;
+}
+
+.smoke:nth-child(3) {
+  left: 50%;
+  animation-delay: 1.5s;
+}
+
+.smoke:nth-child(4) {
+  left: 55%;
+  animation-delay: 2s;
+}
+
+.smoke:nth-child(5) {
+  left: 53%;
+  animation-delay: 2.5s;
+}
+.smoke:nth-child(6) {
+  left: 48%;
+  animation-delay: 3s;
+}
+.smoke:nth-child(7) {
+  left: 55%;
+  animation-delay: 3.5s;
+}
+
+.smoke:nth-child(8) {
+  left: 45%;
+  animation-delay: 4s;
+}
+
+/* ---------------------------------------------------------------------------------------------------- */
+#hoa {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  
+  object-fit: cover;
+
+  mix-blend-mode: screen;
+
+  pointer-events: none; /* không chặn click */
+
+  /* display: none; ẩn trước */
+}
